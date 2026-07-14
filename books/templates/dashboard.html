@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <!-- Welcome Card -->
+    <div class="card shadow border-0 bg-primary text-white mb-4">
+        <div class="card-body text-center">
+
+            <h2>📚 College Library Management System</h2>
+
+            <h5 class="mt-3">
+                Welcome,
+                <strong>{{ user.username }}</strong>
+            </h5>
+
+            <p class="mb-0">
+                Manage Books • Issue Books • Return Books • Profile
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row mb-4">
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white shadow border-0">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-book fs-1"></i>
+
+                    <h5 class="mt-2">Total Books</h5>
+
+                    <h2>{{ total_books }}</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white shadow border-0">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-check-circle fs-1"></i>
+
+                    <h5 class="mt-2">Available</h5>
+
+                    <h2>{{ available_books }}</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-dark shadow border-0">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-journal-check fs-1"></i>
+
+                    <h5 class="mt-2">Issued</h5>
+
+                    <h2>{{ issued_books }}</h2>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-info text-white shadow border-0">
+                <div class="card-body text-center">
+
+                    <i class="bi bi-people fs-1"></i>
+
+                    <h5 class="mt-2">Students</h5>
+
+                    <h2>{{ total_students }}</h2>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+
+        <!-- Books -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow h-100 border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-book-half text-primary fs-1"></i>
+
+                    <h4 class="mt-3">Books</h4>
+
+                    <p class="text-muted">
+                        Browse all books available in the library.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <a href="{% url 'home' %}" class="btn btn-primary w-100">
+                        View Books
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Issue Book -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow h-100 border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-journal-check text-success fs-1"></i>
+
+                    <h4 class="mt-3">Issue Book</h4>
+
+                    <p class="text-muted">
+                        Borrow books from the library.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <a href="{% url 'home' %}" class="btn btn-success w-100">
+                        Issue Book
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Return Book -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow h-100 border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-arrow-repeat text-warning fs-1"></i>
+
+                    <h4 class="mt-3">Return Book</h4>
+
+                    <p class="text-muted">
+                        Return your issued books.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <a href="{% url 'my_books' %}" class="btn btn-warning w-100">
+                        Return Book
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Profile -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow h-100 border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-person-circle text-info fs-1"></i>
+
+                    <h4 class="mt-3">Profile</h4>
+
+                    <p class="text-muted">
+                        View your student profile.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <a href="{% url 'profile' %}" class="btn btn-info text-white w-100">
+                        View Profile
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow h-100 border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-box-arrow-right text-danger fs-1"></i>
+
+                    <h4 class="mt-3">Logout</h4>
+
+                    <p class="text-muted">
+                        Logout from the Library System.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <a href="{% url 'logout' %}" class="btn btn-danger w-100">
+                        Logout
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        {% if is_admin %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card shadow h-100 border-0">
+
+                <div class="card-body text-center">
+
+                    <i class="bi bi-person-gear text-dark fs-1"></i>
+
+                    <h4 class="mt-3">Admin Panel</h4>
+
+                    <p class="text-muted">
+                        Manage books and students.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <a href="/admin/" class="btn btn-dark w-100">
+                        Open Admin
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
